@@ -1,6 +1,6 @@
+// src/js/components/Form.js
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import uuidv1 from "uuid";
 import { addArticle } from "../actions/index";
 
@@ -13,19 +13,16 @@ const mapDispatchToProps = dispatch => {
 class ConnectedForm extends Component {
   constructor() {
     super();
-
     this.state = {
       title: ""
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
   }
-
   handleSubmit(event) {
     event.preventDefault();
     const { title } = this.state;
@@ -33,7 +30,6 @@ class ConnectedForm extends Component {
     this.props.addArticle({ title, id });
     this.setState({ title: "" });
   }
-
   render() {
     const { title } = this.state;
     return (
@@ -55,11 +51,5 @@ class ConnectedForm extends Component {
     );
   }
 }
-
 const Form = connect(null, mapDispatchToProps)(ConnectedForm);
-
-ConnectedForm.propTypes = {
-  addArticle: PropTypes.func.isRequired
-};
-
 export default Form;
